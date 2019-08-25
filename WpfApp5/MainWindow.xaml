@@ -1,0 +1,59 @@
+﻿<Window x:Class="WpfApp5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp5"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <local:JsonBase64Converter x:Key="BinaryConverter"></local:JsonBase64Converter>
+
+        <Style TargetType="ListBox" x:Key="TrombList">
+            <Setter Property="MinWidth" Value="250"></Setter>
+        </Style>
+        <Style TargetType="Label" x:Key="LbList">
+            <Setter Property="Width" Value="50"></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Padding" Value="0,0,0,5"></Setter>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Width" Value="60"></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Padding" Value="10"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="Image" x:Key="ImgLst">
+            <Setter Property="Margin" Value="5,5,10,5"></Setter>
+            <Setter Property="Width" Value="100"></Setter>
+        </Style>
+        <Style TargetType="StackPanel" x:Key="Info">
+            <Setter Property="Margin" Value="0,15,0,0"></Setter>
+        </Style>
+    </Window.Resources>
+    <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Vertical">
+            <ListBox IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding Contactmodel.Contacts}" Style="{StaticResource TrombList}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Style="{StaticResource ImgLst}" Source="{Binding Photo, Converter={ StaticResource BinaryConverter}}"></Image>
+                            <StackPanel Orientation="Vertical" Style="{StaticResource Info}" >
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Style="{StaticResource LbList}">Nom:</Label>
+                                    <TextBlock Text="{Binding Nom}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Style="{StaticResource LbList}">Prenom:</Label>
+                                    <TextBlock Text="{Binding Prenom}"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                        </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </StackPanel>
+</Window>
